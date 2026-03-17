@@ -1,0 +1,22 @@
+name: Sync Fork
+
+on:
+  schedule:
+    # 定时任务，使用cron表达式，以下示例为每天北京时间8点运行
+    - cron: '0 0 * * *' 
+  workflow_dispatch: # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync with upstream
+        uses: aormsby/Fork-Sync-With-Upstream-action@v3.4
+        with:
+          target_repo_token: ${{ secrets.GITHUB_TOKEN }}
+          upstream_sync_repo: Openwrt-Passwall/openwrt-passwall   # 例如：octocat/Hello-World
+          upstream_sync_branch: main
+          target_sync_branch: main
