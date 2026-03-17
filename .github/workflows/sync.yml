@@ -2,8 +2,9 @@ name: Sync Fork
 
 on:
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    # 定时任务，使用cron表达式，以下示例为每天北京时间8点运行
+    - cron: '0 0 * * *' 
+  workflow_dispatch: # 允许手动触发
 
 jobs:
   sync:
